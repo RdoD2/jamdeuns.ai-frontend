@@ -748,6 +748,148 @@
   </div>
 </section>
 
+<!-- Signup Modal -->
+<div id="signup-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+">
+  <div id="modal-backdrop" style="position:absolute;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);"></div>
+  <div style="
+    position: relative;
+    background: #0d1224;
+    border: 1px solid rgba(167,139,250,0.2);
+    border-radius: 28px;
+    padding: 40px 36px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 60px rgba(167,139,250,0.07);
+    max-height: 90vh;
+    overflow-y: auto;
+  ">
+    <button onclick="closeModal()" aria-label="닫기" style="
+      position: absolute;
+      top: 16px; right: 20px;
+      background: none; border: none;
+      color: #8892b0; font-size: 22px;
+      cursor: pointer; line-height: 1;
+      transition: color 0.2s;
+    " onmouseover="this.style.color='#f0f4ff'" onmouseout="this.style.color='#8892b0'">✕</button>
+
+    <div style="text-align:center;margin-bottom:28px;">
+      <div style="
+        display:inline-flex;align-items:center;gap:8px;
+        background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.25);
+        border-radius:100px;padding:6px 14px;font-size:12px;color:#a78bfa;
+        font-weight:600;margin-bottom:14px;
+      ">얼리액세스 신청</div>
+      <h2 id="modal-title" style="font-size:22px;font-weight:800;line-height:1.3;margin-bottom:8px;">
+        오늘 밤부터 시작해요
+      </h2>
+      <p style="font-size:14px;color:#8892b0;line-height:1.6;">
+        가입하면 서비스 오픈 시 가장 먼저 알려드려요.<br/>내 AI 클론도 바로 만들어드릴게요.
+      </p>
+    </div>
+
+    <form id="signup-form" onsubmit="handleSignup(event)" style="display:flex;flex-direction:column;gap:14px;">
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <label for="s-name" style="display:block;font-size:12px;font-weight:600;color:#8892b0;margin-bottom:6px;">이름 <span style="color:#a78bfa">*</span></label>
+          <input id="s-name" name="name" type="text" placeholder="홍길동" required autocomplete="name" style="
+            width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+            border-radius:12px;padding:11px 14px;font-size:14px;font-family:'Noto Sans KR',sans-serif;
+            color:#f0f4ff;outline:none;transition:border-color 0.2s;
+          " onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'"/>
+        </div>
+        <div>
+          <label for="s-gender" style="display:block;font-size:12px;font-weight:600;color:#8892b0;margin-bottom:6px;">성별 <span style="color:#a78bfa">*</span></label>
+          <select id="s-gender" name="gender" required style="
+            width:100%;background:#111828;border:1px solid rgba(255,255,255,0.1);
+            border-radius:12px;padding:11px 14px;font-size:14px;font-family:'Noto Sans KR',sans-serif;
+            color:#f0f4ff;outline:none;transition:border-color 0.2s;cursor:pointer;
+          " onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+            <option value="" disabled selected style="color:#8892b0">선택</option>
+            <option value="male">남성</option>
+            <option value="female">여성</option>
+            <option value="other">기타</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <label for="s-birthyear" style="display:block;font-size:12px;font-weight:600;color:#8892b0;margin-bottom:6px;">출생 연도 <span style="color:#a78bfa">*</span></label>
+          <input id="s-birthyear" name="birthyear" type="number" placeholder="1995" min="1930" max="2010" required style="
+            width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+            border-radius:12px;padding:11px 14px;font-size:14px;font-family:'Noto Sans KR',sans-serif;
+            color:#f0f4ff;outline:none;transition:border-color 0.2s;
+          " onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'"/>
+        </div>
+        <div>
+          <label for="s-birthday" style="display:block;font-size:12px;font-weight:600;color:#8892b0;margin-bottom:6px;">생일 <span style="color:#8892b0;font-weight:400">(선택)</span></label>
+          <input id="s-birthday" name="birthday" type="text" placeholder="MM/DD" maxlength="5" style="
+            width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+            border-radius:12px;padding:11px 14px;font-size:14px;font-family:'Noto Sans KR',sans-serif;
+            color:#f0f4ff;outline:none;transition:border-color 0.2s;
+          " onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'"/>
+        </div>
+      </div>
+
+      <div>
+        <label for="s-phone" style="display:block;font-size:12px;font-weight:600;color:#8892b0;margin-bottom:6px;">전화번호 <span style="color:#a78bfa">*</span></label>
+        <input id="s-phone" name="phone" type="tel" placeholder="010-0000-0000" required autocomplete="tel" style="
+          width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+          border-radius:12px;padding:11px 14px;font-size:14px;font-family:'Noto Sans KR',sans-serif;
+          color:#f0f4ff;outline:none;transition:border-color 0.2s;
+        " onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'"/>
+      </div>
+
+      <div>
+        <label for="s-email" style="display:block;font-size:12px;font-weight:600;color:#8892b0;margin-bottom:6px;">이메일 <span style="color:#a78bfa">*</span></label>
+        <input id="s-email" name="email" type="email" placeholder="hello@example.com" required autocomplete="email" style="
+          width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+          border-radius:12px;padding:11px 14px;font-size:14px;font-family:'Noto Sans KR',sans-serif;
+          color:#f0f4ff;outline:none;transition:border-color 0.2s;
+        " onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'"/>
+      </div>
+
+      <div style="
+        background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.12);
+        border-radius:12px;padding:14px;margin-top:4px;
+      ">
+        <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:13px;color:#8892b0;line-height:1.5;">
+          <input type="checkbox" required name="agree" style="margin-top:2px;accent-color:#a78bfa;width:15px;height:15px;flex-shrink:0;" />
+          <span>
+            <span style="color:#f0f4ff;font-weight:600;">개인정보 수집·이용에 동의합니다 (필수)</span><br/>
+            이름, 성별, 생년월일, 전화번호, 이메일을 서비스 제공 목적으로 수집합니다.
+          </span>
+        </label>
+      </div>
+
+      <button type="submit" id="signup-btn" style="
+        width:100%;background:linear-gradient(135deg,#a78bfa,#f472b6);
+        color:white;border:none;padding:15px;border-radius:100px;
+        font-size:16px;font-weight:700;font-family:'Noto Sans KR',sans-serif;
+        cursor:pointer;transition:opacity 0.2s,transform 0.2s;
+        box-shadow:0 0 28px rgba(167,139,250,0.3);margin-top:4px;
+      " onmouseover="this.style.opacity='0.88';this.style.transform='translateY(-1px)'"
+         onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
+        얼리액세스 신청하기
+      </button>
+
+      <p style="text-align:center;font-size:11px;color:#8892b0;opacity:0.6;line-height:1.5;">
+        서비스 오픈 전까지 어떠한 마케팅 연락도 드리지 않습니다.<br/>
+        수집된 정보는 <a href="#" style="color:#a78bfa;text-decoration:none;">개인정보처리방침</a>에 따라 안전하게 보호됩니다.
+      </p>
+    </form>
+  </div>
+</div>
+
 <!-- Footer -->
 <footer>
   <div class="container">
@@ -943,17 +1085,52 @@
   }, { threshold: 0.5 });
   if (countEl) countObserver.observe(countEl);
 
-  // ── Waitlist form ──────────────────────────────────────
-  function handleSubmit(e) {
+  // ── Modal ──────────────────────────────────────────────
+  const modal = document.getElementById('signup-modal');
+
+  function openModal() {
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => modal.querySelector('[role="dialog"] > div:last-child, div[style*="max-width: 440px"]'), 10);
+  }
+
+  function closeModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('modal-backdrop').addEventListener('click', closeModal);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  // Hook all CTA buttons to open modal
+  document.querySelectorAll('a[href="#waitlist"], .nav-cta').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  // ── Signup form ────────────────────────────────────────
+  function handleSignup(e) {
     e.preventDefault();
-    const msg = document.getElementById('waitlist-msg');
-    const btn = e.target.querySelector('button[type="submit"]');
+    const btn = document.getElementById('signup-btn');
     btn.textContent = '신청 완료!';
     btn.disabled = true;
     btn.style.opacity = '0.7';
-    msg.innerHTML = '🎉 신청 완료! 오픈되면 바로 연락드릴게요.';
-    msg.style.color = '#a78bfa';
-    document.getElementById('email').value = '';
+    setTimeout(() => {
+      closeModal();
+      const msg = document.getElementById('waitlist-msg');
+      if (msg) {
+        msg.innerHTML = '🎉 신청 완료! 오픈되면 바로 연락드릴게요.';
+        msg.style.color = '#a78bfa';
+      }
+    }, 800);
+  }
+
+  // ── Old waitlist form (bottom) ─────────────────────────
+  function handleSubmit(e) {
+    e.preventDefault();
+    openModal();
   }
 </script>
 
